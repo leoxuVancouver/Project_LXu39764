@@ -225,12 +225,6 @@ static function showMeetupList($meetups)
                                 echo "<td><a href=\"".$link."\">Join</a></td>";
                             }
                            
-                            if($meetup->getUserId()==$_SESSION['userId']){
-                                $link = $_SERVER['PHP_SELF']."?action=deletel&meetupId=".$meetup->getId();
-                                echo "<td><a href=\"".$link."\">Delete</a></td>";
-                                $link = $_SERVER['PHP_SELF']."?action=editl&meetupId=".$meetup->getId();
-                                echo "<td><a href=\"".$link."\">Edit</a></td>";
-                            }
                             echo "</tr>";
                         }
                         
@@ -395,20 +389,13 @@ static function showMyMeetupList($meetups)
                             echo "<td>".$meetup->getmDay()."</td>";
                             echo "<td>".$meetup->getmTime()."</td>";
 
-                            if(isset($meetup->joined)&&$meetup->joined){
-                                $link = $_SERVER['PHP_SELF']."?action=cancel&meetupId=".$meetup->getId();
-                                echo "<td><a href=\"".$link."\">Cancel</a></td>";
-                            }else{
-                                $link = $_SERVER['PHP_SELF']."?action=join&meetupId=".$meetup->getId();
-                                echo "<td><a href=\"".$link."\">Join</a></td>";
-                            }
-                           
-                            if($meetup->getUserId()==$_SESSION['userId']){
-                                $link = $_SERVER['PHP_SELF']."?action=deletel&meetupId=".$meetup->getId();
+                         
+                            
+                                $link = $_SERVER['PHP_SELF']."?action=delete&meetupId=".$meetup->getId();
                                 echo "<td><a href=\"".$link."\">Delete</a></td>";
-                                $link = $_SERVER['PHP_SELF']."?action=editl&meetupId=".$meetup->getId();
+                                $link = "./Project_edit_meetup_LXu39674.php?action=edit&meetupId=".$meetup->getId();
                                 echo "<td><a href=\"".$link."\">Edit</a></td>";
-                            }
+                            
                             echo "</tr>";
                         }
                         

@@ -26,9 +26,12 @@ if(empty($_POST)){
 
 
         MeetupDAO::initialize("Meetup");
+        
+
+        if(isset($_GET['action'])&&$_GET['action']=='delete'){
+            MeetupDAO::deleteMeetup($_GET['meetupId']);
+        }
         $myMeetups = MeetupDAO::getMeetupByUser($_SESSION['userId']);
-    
-    
         Page::showHeader();
         Page::showMyMeetupList($myMeetups);
         Page::showFooter();

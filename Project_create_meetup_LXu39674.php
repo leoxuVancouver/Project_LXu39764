@@ -12,6 +12,8 @@ require_once('inc/Utility/MeetupDAO.class.php');
 require_once('inc/Utility/Validate.class.php');
 require_once('inc/Utility/FileUtility.class.php');
 require_once('inc/Utility/MeetupDao.class.php');
+require_once('inc/Utility/MeetupUserDao.class.php');
+require_once('inc/Utility/JoinStatus.class.php');
 require_once('inc/Utility/DataParse.class.php');
 //Start the session
 session_start();
@@ -38,7 +40,6 @@ if(empty($_POST)){
     MeetupDAO::initialize("Meetup");
     //title,province,city,address,mTime,mDay,userId
     $nm=new Meetup();
-    $nm->setUserId($_SESSION['userId']);
     $nm->setTitle($_POST['title']);
     $nm->setCategory($_POST['category']);
     $nm->setProvince($_POST['province']);
@@ -48,7 +49,14 @@ if(empty($_POST)){
     $nm->setmTime($_POST['mTime']);
     $nm->setmDay($_POST['mDay']);
     $nm->setuserId($_SESSION['userId']);
-    MeetupDAO::createMeetup($nm);
-    header("Location: Project_my_meetup_LXu39674.php");
+    //
+    $meetupId=MeetupDAO::createMeetup($nm);
+   //
+   $nmu=new Meetup_users();
+            $nmu->setUserId($_SESSION['userId']);
+            $nmu->setMeetupId($meetupId);
+            MeetupUserDAO::initialize("Meetup_users");
+            MeetupUserDAO::createMeetupUsers($nmu); 
+    header("Location: Project_meetup_LXu39674.php");
     exit;  
 }

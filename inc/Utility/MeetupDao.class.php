@@ -51,6 +51,16 @@ class MeetupDAO
         return self::$db->getSetResult();
     }
 
+    static function getMeetupById($meetupId)
+    {
+
+        $selectSQL = "SELECT * FROM meetups WHERE meetupId = :meetupId;";
+        self::$db->query($selectSQL);
+        self::$db->bind(":meetupId", $meetupId);
+        self::$db->execute();
+        return self::$db->singleResult();
+    }
+
 
 
     // update the current Meetup profile
@@ -73,5 +83,27 @@ class MeetupDAO
         self::$db->query($selectSQL);
         self::$db->execute();
         return self::$db->getSetResult();
+    }
+
+//
+    static function deleteMeetup($meetupId) : bool {
+        $sql = "DELETE FROM meetups WHERE Id=:meetupId";
+
+        try{
+            self::$db->query($sql);
+            self::$db->bind(':meetupId', $meetupId);
+            self::$db->execute();
+
+            if(self::$db->rowCount() != 1){
+                throw new Exception("Problem deleting record");
+            }
+        }catch(Exception $exc){
+            echo $exc->getMessage();
+            return false;
+        }
+
+        return true;
+
+
     }
 }
