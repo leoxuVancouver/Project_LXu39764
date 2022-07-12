@@ -17,7 +17,7 @@ class FileUtility {
             fclose($fh);
          
         } catch (Exception $fe)  {
-            self::$notifications[] = $fe->getMessage(); 
+            Page::$notifications[] = $fe->getMessage(); 
         }
        
         return $contents;
@@ -43,7 +43,7 @@ class FileUtility {
 
             
         } catch (Exception $fe)  {
-            self::$notifications[] = array($fe->getMessage());                        
+            Page::$notifications[] = array($fe->getMessage());                        
         }
         
         
@@ -54,12 +54,12 @@ class FileUtility {
        
 
         //A simple check if a file was uploaded
-
-        if (empty($_FILES['cateData'])) {
-            self::$notifications[] = "Error: Please select a file to upload.";
-          
+        
+        if (empty($_FILES['cateData']['name'])) {
+            Page::$notifications[] = "Error: Please select a file to upload.";       
         }
         else{
+            
             if (is_uploaded_file($_FILES['cateData']['tmp_name'])) {
                 // We skip the file format checking
                 
@@ -67,10 +67,10 @@ class FileUtility {
                 
                 $result = move_uploaded_file($_FILES['cateData']['tmp_name'],FILENAME);
                 if ($result == 1){ 
-                    self::$notifications[] = "Success: File was successfully uploaded.";                    
+                    Page::$notifications[] = "Success: File was successfully uploaded.";                    
                 }
                 else 
-                    self::$notifications[] = "Error: There was a problem uploading the file.";
+                    Page::$notifications[] = "Error: There was a problem uploading the file.";
             }
         }
 

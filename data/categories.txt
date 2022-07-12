@@ -1,3 +1,4 @@
-Language Study, study language together
+LanguageStudy,study language together
 Dating, meet new friends
-Sporting , play games
+Sporting, play games
+Dancing, dance with music

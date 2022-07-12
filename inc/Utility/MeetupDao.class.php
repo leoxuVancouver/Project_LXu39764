@@ -4,7 +4,7 @@
 
 class MeetupDAO
 {
-    // id  ;title; $province;		$city; $address;	$mTime;$mDay;$userId;
+   
 
     // Create a member to store the PDO agent
      static $db;
@@ -54,7 +54,7 @@ class MeetupDAO
     static function getMeetupById($meetupId)
     {
 
-        $selectSQL = "SELECT * FROM meetups WHERE meetupId = :meetupId;";
+        $selectSQL = "SELECT * FROM meetups WHERE id = :meetupId;";
         self::$db->query($selectSQL);
         self::$db->bind(":meetupId", $meetupId);
         self::$db->execute();
@@ -68,9 +68,27 @@ class MeetupDAO
     // so, it is not needed in our app, but hey.. more practice is better!
     static function updateMeetup(Meetup $Meetup)
     {
+        $sql = "UPDATE Meetups  
+        SET title=:title,category=:category, province=:province, city=:city, address=:address,
+        mTime=:mTime,mDay=:mDay
+        WHERE id=:id";
+        // prepare the query
+        self::$db->query($sql);
 
-        // you know the drill
-        // you may return the rowCount        
+        // bind the parameters
+        self::$db->bind(':id', $Meetup->getId());
+        self::$db->bind(':title', $Meetup->gettitle());
+        self::$db->bind(':category', $Meetup->getcategory());
+        self::$db->bind(':province', $Meetup->getProvince());
+        self::$db->bind(':city', $Meetup->getcity());
+        self::$db->bind(':address', $Meetup->getaddress());
+        self::$db->bind(':mTime', $Meetup->getmTime());
+        self::$db->bind(':mDay', $Meetup->getmDay());
+
+        // execute the query
+        self::$db->execute();
+
+        return self::$db->rowCount(); 
 
     }
 

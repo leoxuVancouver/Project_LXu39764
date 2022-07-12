@@ -312,6 +312,80 @@ static function createMeetup($categories)
 
 <?php }
 
+static function editMeetup($meetup,$categories)
+    { ?>
+        <section>
+            <div>
+                <?php
+                if (self::$notifications) {
+                    echo  "<p class='error'>All input are required.</p>";
+                    foreach (self::$notifications as $note) {
+                        echo "<p class='error'>" . $note, "</p>";
+                    }
+                    echo "<br>";
+                }
+                ?>
+
+<!-- title,province,city,address,mTime,mDay,userId -->
+                <form action=<?=$_SERVER['PHP_SELF']?> method="post">
+                    <h2>Create a meetUp</h2>
+                    <div>
+                        <label for="meetupId">MeetupId</label>
+                        <input type="text" name="meetupId" value=<?= $meetup->getId()?> readonly>
+                    </div>
+                    <div>
+                        <label for="title">Title</label>
+                        <input type="text" name="title" value=<?= $meetup->getTitle()?> required>
+                    </div>
+                    <div>
+                        <label for="category">Category(<a href="./Project_create_cate_LXu39674.php">click to add category</a>)</label>
+                        <select name="category" required>
+                        <?php
+                               foreach($categories as $cate){
+                                // echo $meetup->getCategory()." ".$cate;
+                                $selected=($meetup->getCategory()==$cate)?"selected":"null";
+                                echo "<option value=".$cate." ".$selected.">".$cate."</option>";
+                               }
+                            ?>
+                        </select>
+                        
+                    </div>
+                    <div>
+                        <label for="address">address</label>
+                        <input type="text" name="address" value=<?= $meetup->getTitle()?> required>
+                    </div>
+                    <div>
+                        <label for="city">city</label>
+                        <input type="city" name="city" value=<?= $meetup->getCity()?> required>
+                    </div>
+                    <div>
+                        <label for="province">province</label>
+                        <input type="text" name="province" value=<?= $meetup->getprovince()?> required>
+                    </div>
+    
+                    <div>
+                        <label for="mTime">Meeting Time</label>
+                        <input type="time" name="mTime" value=<?= $meetup->getmTime()?> required>
+                    </div>
+
+                    <div>
+                        <label for="mDay">Meeting Day</label>
+                        <input type="date" name="mDay" 
+                        value=<?= $meetup->getmDay()?> min=<?=date("Y-m-d")?>
+                         required>
+                    </div>
+                       
+                  
+                    <div>
+                        <input type="submit" name="submit" value="Edit">
+                    </div>
+                </form>
+                <p>Click to <a href="./Project_logout_LXu39674.php">logout</a></p>
+            </div>
+        </section>
+
+<?php }
+
 static function createCategory()
     { ?>
         <section>
@@ -319,7 +393,6 @@ static function createCategory()
                
                 <?php
                 if (self::$notifications) {
-                    echo  "<p class='error'>All input are required.</p>";
                     foreach (self::$notifications as $note) {
                         echo "<p class='error'>" . $note, "</p>";
                     }
@@ -342,16 +415,17 @@ static function createCategory()
                         <input type="submit" name="submit" value="Create">
                     </div>
                 </form>
+                
             </div>
             
             <h2>Load a file</h2>
             <form method="post" enctype="multipart/form-data">
                 You can also load a data file (txt). <br>
-                <input type="file" name="cateDat" value=""><br>
+                <input type="file" name="cateData" value=""><br>
                 <input type="hidden" name="upload" value="upload">
                 <input type="submit" name="submit" value="Go!">
             </form>
-      
+            <p><a href=<?=$_SERVER['HTTP_REFERER']?>>Back</a></p>
         </section>
 
 <?php }

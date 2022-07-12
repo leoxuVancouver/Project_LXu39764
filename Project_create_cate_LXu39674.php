@@ -37,10 +37,10 @@ if(empty($_POST)){
     if(isset($_POST['upload'])&&$_POST['upload']=='upload'){
         FileUtility::upload();
     }else{
-
      FileUtility::write();
     }
 
-    header("Location: Project_create_meetup_LXu39674.php");
-    exit;  
+    Page::showHeader();
+    Page::createCategory();
+    Page::showFooter(); 
 }

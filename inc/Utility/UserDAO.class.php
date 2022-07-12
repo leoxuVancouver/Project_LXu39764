@@ -73,7 +73,7 @@ class UserDAO
         // execute the query
         self::$db->execute();
 
-        return self::$db->lastInsertedId(); 
+        return self::$db->rowCount(); 
 
     }
 
