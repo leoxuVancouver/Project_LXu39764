@@ -23,14 +23,27 @@ if(empty($_POST)){
 
 
     if(LoginManager::verifyLogin()){
+
+
         MeetupDAO::initialize("Meetup");
+        $myAttends = MeetupDAO::getMeetupByAttend($_SESSION['userId']);
+        MeetupUserDAO::initialize("Meetup_users");
         
-        if(isset($_GET['action'])&&$_GET['action']=='delete'){
-            MeetupDAO::deleteMeetup($_GET['meetupId']);
+        if(isset($_GET['action'])&&$_GET['action']=="join"){
+            $nmu=new Meetup_users();
+            $nmu->setUserId($_SESSION['userId']);
+            $nmu->setMeetupId($_GET['meetupId']);
+            MeetupUserDAO::initialize("Meetup_users");
+            MeetupUserDAO::createMeetupUsers($nmu);
         }
-        $myMeetups = MeetupDAO::getMeetupByUser($_SESSION['userId']);
+        if(isset($_GET['action'])&&$_GET['action']=="cancel"){
+            MeetupUserDAO::deleteMeetupUsers($_SESSION['userId'],$_GET['meetupId']);
+        }
+        $meetupUsers=MeetupUserDao::getMeetupUsers();
+        JoinStatus::check($myAttends,$meetupUsers);
+        
         Page::showHeader();
-        Page::showMyMeetupList($myMeetups);
+        Page::showMeetupList($myAttends);
         Page::showFooter();
 
         

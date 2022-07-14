@@ -61,6 +61,19 @@ class MeetupDAO
         return self::$db->singleResult();
     }
 
+    static function getMeetupByAttend($userId)
+    {
+
+        $selectSQL = "SELECT m.* FROM meetups m
+                      join meetup_users ms
+                      on ms.meetupId=m.id
+                      where ms.userId=2";
+        self::$db->query($selectSQL);
+        // self::$db->bind(":userId", $userId);
+        self::$db->execute();
+        return self::$db->singleResult();
+    }
+
 
 
     // update the current Meetup profile

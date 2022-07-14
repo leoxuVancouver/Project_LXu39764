@@ -205,6 +205,8 @@ static function showMeetupList($meetups)
                             </th>
                         </tr>
                     <?php
+                        if(gettype($meetups)=='array'){
+
                         
                         foreach($meetups as $meetup){
                             echo "<tr>";
@@ -227,7 +229,28 @@ static function showMeetupList($meetups)
                            
                             echo "</tr>";
                         }
-                        
+                    }  else{
+                        $meetup=$meetups;
+                        echo "<tr>";
+                        echo "<td>".$meetup->getId()."</td>";
+                        echo "<td>".$meetup->getTitle()."</td>";
+                        echo "<td>".$meetup->getCategory()."</td>";
+                        echo "<td>".$meetup->getprovince()."</td>";
+                        echo "<td>".$meetup->getcity()."</td>";
+                        echo "<td>".$meetup->getaddress()."</td>";
+                        echo "<td>".$meetup->getmDay()."</td>";
+                        echo "<td>".$meetup->getmTime()."</td>";
+
+                        if(isset($meetup->joined)&&$meetup->joined){
+                            $link = $_SERVER['PHP_SELF']."?action=cancel&meetupId=".$meetup->getId();
+                            echo "<td><a href=\"".$link."\">Cancel</a></td>";
+                        }else{
+                            $link = $_SERVER['PHP_SELF']."?action=join&meetupId=".$meetup->getId();
+                            echo "<td><a href=\"".$link."\">Join</a></td>";
+                        }
+                       
+                        echo "</tr>";
+                    }
                     
                     ?>
                     </table>
@@ -238,6 +261,7 @@ static function showMeetupList($meetups)
         </div>
         <p><a href="./Project_edit_user_LXu39674.php">Edit my information </a></p>
         <p><a href="./Project_my_meetup_LXu39674.php">Find my meetUps</a></p>
+        <p><a href="./Project_my_attended_LXu39674.php">Find my attendation</a></p>
         <p>Click to <a href="./Project_logout_LXu39674.php">logout</a></p>
 
     </section>
@@ -483,6 +507,7 @@ static function showMyMeetupList($meetups)
         </div>
         <p><a href="./Project_edit_user_LXu39674.php">Edit my information </a></p>
         <p><a href="./Project_my_meetup_LXu39674.php">Find my meetUps</a></p>
+        <p><a href="./Project_my_attended_LXu39674.php">Find my attendation</a></p>
         <p>Click to <a href="./Project_logout_LXu39674.php">logout</a></p>
 
     </section>
