@@ -30,20 +30,10 @@ if(!empty($_POST)){
     };
 }
 
-    // If the form entries are valid
-        // initialize the DAO
-
-        // instantiate a new user
-        // assemble the user data
-        // create the user
-        // send/redirect the user to the login page
-    
-    
-// Display the page elements and registration form (with updated page notifications if any)
 
 Page::showHeader();
 Page::showRegistration();
-Page::showFooter();
+Page::showFooterLogout();
 
 
 

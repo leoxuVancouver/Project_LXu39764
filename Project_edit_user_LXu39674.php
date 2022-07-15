@@ -27,14 +27,14 @@ if(empty($_POST)){
         $user = UserDAO::getUser($_SESSION['loggedin']);
         Page::showHeader();
         Page::showUser($user);
-        Page::showFooter();
+        Page::showFooterLogin();
     
     }else{
         header("Location: Project_login_LXu39674.php");
         exit;
     }
 }else{
-    if(Validate::validateRegisterForm()){
+    if(Validate::validateEditUserForm()){
         UserDAO::initialize("User");
         //title,province,city,address,mTime,mDay,userId
         $_SESSION['loggedin']=$_POST['email'];
@@ -53,7 +53,7 @@ if(empty($_POST)){
         $user = UserDAO::getUser($_SESSION['loggedin']);
         Page::showHeader();
         Page::showUser($user);
-        Page::showFooter(); 
+        Page::showFooterLogin(); 
     }
     
 }

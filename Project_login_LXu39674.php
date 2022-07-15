@@ -22,7 +22,7 @@ if(!empty($_POST)){
     //Get the current user 
 
     $user=UserDAO::getUser($_POST['email']);
-    // var_dump($user);
+   
     //if there is no such user, update the page notifications
     if(!$user){
         Page::$notifications[]="Wrong username or password";
@@ -59,10 +59,8 @@ if(!empty($_POST)){
     }else{
         Page::showHeader();
         Page::showLogin();
-        Page::showFooter();
+        Page::showFooterLogout();
     }
             
-//Use header to send the user to the user profile page
-       
-// Display the page element
+
 ?>

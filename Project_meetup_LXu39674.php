@@ -44,15 +44,30 @@ if(empty($_POST)){
         
         //
         Page::showHeader();
-        
         Page::showMeetupList($meetups);
-        Page::showFooter();
+        Page::showFooterLogin();
     }else{
         header("Location: Project_login_LXu39674.php");
         exit;
     }
 
-}else{      
-    header("Location: Project_create_meetup_LXu39674.php");
-    exit;  
+}else{   
+    if(isset($_POST['search'])&&$_POST['search']=="search"){
+        MeetupDAO::initialize("Meetup");
+        $meetups = MeetupDAO::getMeetupByTitle($_POST['searchTitle']);
+        MeetupUserDAO::initialize("Meetup_users");
+        $meetupUsers=MeetupUserDao::getMeetupUsers();
+        JoinStatus::check($meetups,$meetupUsers);
+        
+        //
+        Page::showHeader();
+        Page::showMeetupList($meetups);
+        Page::showFooterLogin();
+
+
+    }  else{
+        header("Location: Project_create_meetup_LXu39674.php");
+        exit; 
+    }
+     
 }

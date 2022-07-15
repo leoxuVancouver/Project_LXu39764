@@ -13,20 +13,11 @@ require_once('inc/Utility/Validate.class.php');
 require_once('inc/Utility/FileUtility.class.php');
 require_once('inc/Utility/MeetupDao.class.php');
 
-//Start the session
-session_start();
 
-if(LoginManager::verifyLogin()){
-    Page::showHeader();
-    echo "<p>Thank you for your visit  ".$_SESSION['nickname']."! </p>";
-    Page::showFooterLogout();
-    unset($_SESSION['loggedin']);
-    unset($_SESSION['nickname']);
-    unset($_SESSION['userId']);
-// destroy it
-session_destroy();
+        Page::showHeader();
+        Page::showWelcome();
+        Page::showFooterLogout();
 
-}else{
-    header("Location: Project_login_LXu39674.php");
-    exit;
-}
+            
+
+?>

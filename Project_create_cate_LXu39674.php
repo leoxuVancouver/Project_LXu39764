@@ -22,11 +22,10 @@ if(empty($_POST)){
 
     if(LoginManager::verifyLogin()){
 
-        // get the Meetup detail
         
         Page::showHeader();
         Page::createCategory();
-        Page::showFooter();
+        Page::showFooterLogin();
     
     }else{
         header("Location: Project_login_LXu39674.php");
@@ -42,5 +41,5 @@ if(empty($_POST)){
 
     Page::showHeader();
     Page::createCategory();
-    Page::showFooter(); 
+    Page::showFooterLogin(); 
 }

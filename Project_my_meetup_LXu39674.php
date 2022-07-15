@@ -31,7 +31,7 @@ if(empty($_POST)){
         $myMeetups = MeetupDAO::getMeetupByUser($_SESSION['userId']);
         Page::showHeader();
         Page::showMyMeetupList($myMeetups);
-        Page::showFooter();
+        Page::showFooterLogin();
 
         
     
@@ -41,8 +41,9 @@ if(empty($_POST)){
     }
 }else{
    
-    header("Location: Project_create_meetup_LXu39674.php");
-    exit;  
+        header("Location: Project_create_meetup_LXu39674.php");
+        exit; 
+
     
 
 }

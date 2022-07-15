@@ -40,11 +40,16 @@ if(empty($_POST)){
             MeetupUserDAO::deleteMeetupUsers($_SESSION['userId'],$_GET['meetupId']);
         }
         $meetupUsers=MeetupUserDao::getMeetupUsers();
-        JoinStatus::check($myAttends,$meetupUsers);
+        if($myAttends){
+            JoinStatus::check($myAttends,$meetupUsers);
+            
+        }
+        
         
         Page::showHeader();
+        
         Page::showMeetupList($myAttends);
-        Page::showFooter();
+        Page::showFooterLogin();
 
         
     
@@ -53,9 +58,23 @@ if(empty($_POST)){
         exit;
     }
 }else{
-   
-    header("Location: Project_create_meetup_LXu39674.php");
-    exit;  
+    if(isset($_POST['search'])&&$_POST['search']=="search"){
+        MeetupDAO::initialize("Meetup");
+        $meetups = MeetupDAO::getMeetupByTitleUser($_SESSION['userId'],'searchTitle');
+        MeetupUserDAO::initialize("Meetup_users");
+        $meetupUsers=MeetupUserDao::getMeetupUsers();
+        JoinStatus::check($meetups,$meetupUsers);
+        
+        //
+        Page::showHeader();
+        Page::showMeetupList($meetups);
+        Page::showFooterLogin();
+
+
+    }  else{
+        header("Location: Project_create_meetup_LXu39674.php");
+        exit; 
+    }
     
 
 }

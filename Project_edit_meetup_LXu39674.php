@@ -32,7 +32,7 @@ if(empty($_POST)){
         $categories=DataParse::strToArray($content);
         Page::showHeader();
         Page::editMeetup($meetup,$categories);
-        Page::showFooter();
+        Page::showFooterLogin();
     
     }else{
         header("Location: Project_login_LXu39674.php");
@@ -62,7 +62,7 @@ if(empty($_POST)){
         $categories=DataParse::strToArray($content);
         Page::showHeader();
         Page::editMeetup($meetup,$categories);
-        Page::showFooter();  
+        Page::showFooterLogin();  
     }
     
 }

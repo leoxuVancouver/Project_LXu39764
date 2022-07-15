@@ -61,17 +61,40 @@ class MeetupDAO
         return self::$db->singleResult();
     }
 
+    static function getMeetupByTitle($title)
+    {
+
+        $selectSQL = "SELECT * FROM meetups 
+            WHERE title like :title ";
+        self::$db->query($selectSQL);
+        self::$db->bind(":title", "%".$title."%");
+        self::$db->execute();
+        return self::$db->getSetResult();
+    }
+
+    static function getMeetupByTitleUser($userId,$title)
+    {
+
+        $selectSQL = "SELECT * FROM meetups 
+            WHERE title like :title and userId=:userId ";
+        self::$db->query($selectSQL);
+        self::$db->bind(":title", "%".$title."%");
+        self::$db->bind(":userId", $userId);
+        self::$db->execute();
+        return self::$db->getSetResult();
+    }
+
     static function getMeetupByAttend($userId)
     {
 
         $selectSQL = "SELECT m.* FROM meetups m
                       join meetup_users ms
                       on ms.meetupId=m.id
-                      where ms.userId=2";
+                      where ms.userId=:userId";
         self::$db->query($selectSQL);
-        // self::$db->bind(":userId", $userId);
+        self::$db->bind(":userId", $userId);
         self::$db->execute();
-        return self::$db->singleResult();
+        return self::$db->getSetResult();
     }
 
 

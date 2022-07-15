@@ -20,8 +20,6 @@ session_start();
 
 if(empty($_POST)){
   
-
-
     if(LoginManager::verifyLogin()){
 
         // get the Meetup detail
@@ -30,7 +28,7 @@ if(empty($_POST)){
         $categories=DataParse::strToArray($content);
         Page::showHeader();
         Page::createMeetup($categories);
-        Page::showFooter();
+        Page::showFooterLogin();
     
     }else{
         header("Location: Project_login_LXu39674.php");
