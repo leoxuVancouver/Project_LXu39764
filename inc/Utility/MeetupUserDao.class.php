@@ -79,6 +79,19 @@ class MeetupUserDAO
 
         return self::$db->singleResult();
     }
+    
+    static function countMeetupUser($meetupId){        
+        $sql = "SELECT count(*) from meetup_users 
+                WHERE  meetupId=:meetupId";
+        
+        self::$db->query($sql);
+        self::$db->bind(':meetupId', $meetupId);
+        self::$db->execute();
+        return self::$db->countSelect();
+    }
+
+
+
 
 
     

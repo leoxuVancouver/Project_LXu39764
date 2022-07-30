@@ -14,7 +14,7 @@ require_once('inc/Utility/FileUtility.class.php');
 require_once('inc/Utility/MeetupDao.class.php');
 require_once('inc/Utility/MeetupUserDao.class.php');
 require_once('inc/Utility/JoinStatus.class.php');
-
+require_once('inc/Utility/AttendeeCount.class.php');
 //Start the session
 session_start();
 

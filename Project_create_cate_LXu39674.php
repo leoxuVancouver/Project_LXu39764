@@ -34,9 +34,9 @@ if(empty($_POST)){
 }else{  
     
     if(isset($_POST['upload'])&&$_POST['upload']=='upload'){
-        FileUtility::upload();
+        FileUtility::uploadCatData();
     }else{
-     FileUtility::write();
+      FileUtility::write();
     }
 
     Page::showHeader();

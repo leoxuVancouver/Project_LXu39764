@@ -14,9 +14,27 @@ require_once('inc/Utility/FileUtility.class.php');
 require_once('inc/Utility/MeetupDao.class.php');
 
 
+    
+
+        session_start();
+
+
+  
+
+
+    if(LoginManager::verifyLogin()){
+
+        
+        Page::showHeader();
+        Page::showWelcome();
+        Page::showFooterLogin();
+    
+    }else{
         Page::showHeader();
         Page::showWelcome();
         Page::showFooterLogout();
+    }
+
 
             
 

@@ -53,6 +53,7 @@ if(empty($_POST)){
         $nm->setmTime($_POST['mTime']);
         $nm->setmDay($_POST['mDay']);
         MeetupDAO::updateMeetup($nm);
+        Page::$notifications[]="user information is updated";
         header("Location: Project_meetup_LXu39674.php");
         exit;  
     }else{

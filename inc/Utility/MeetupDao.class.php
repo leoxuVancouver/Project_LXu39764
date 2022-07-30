@@ -19,14 +19,15 @@ class MeetupDAO
     static function createMeetup(Meetup $Meetup)
     {
     
-        $sql = "INSERT INTO Meetups (title,category, province, city, address,mTime,mDay,userId)
-        VALUES (:title,:category, :province, :city, :address,:mTime,:mDay,:userId)";
+        $sql = "INSERT INTO Meetups (title,image,category, province, city, address,mTime,mDay,userId)
+        VALUES (:title,:image,:category, :province, :city, :address,:mTime,:mDay,:userId)";
         // prepare the query
         self::$db->query($sql);
 
         // bind the parameters
         self::$db->bind(':title', $Meetup->gettitle());
         self::$db->bind(':category', $Meetup->getcategory());
+        self::$db->bind(':image', $Meetup->getImage());
         self::$db->bind(':province', $Meetup->getProvince());
         self::$db->bind(':city', $Meetup->getcity());
         self::$db->bind(':address', $Meetup->getaddress());

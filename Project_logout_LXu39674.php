@@ -18,7 +18,7 @@ session_start();
 
 if(LoginManager::verifyLogin()){
     Page::showHeader();
-    echo "<p>Thank you for your visit  ".$_SESSION['nickname']."! </p>";
+    echo "<h3 class='text-success'>Thank you for your visit  <i>".$_SESSION['nickname']."</i>! </h3>";
     Page::showFooterLogout();
     unset($_SESSION['loggedin']);
     unset($_SESSION['nickname']);

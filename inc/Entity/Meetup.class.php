@@ -6,6 +6,7 @@ class Meetup {
     
 	private $id;
 	private $title;
+	private $image;
 	private $category;
 	private $province;		
 	private $city;
@@ -140,6 +141,20 @@ class Meetup {
 	{
 		$this->category = $category;
 
+	}
+
+
+	public function getImage()
+	{
+		return $this->image;
+	}
+
+
+	public function setImage($image)
+	{
+		$this->image = $image;
+
+		return $this;
 	}
 }
 

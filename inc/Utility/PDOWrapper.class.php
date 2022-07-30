@@ -103,6 +103,10 @@ class PDOWrapper  {
     public function lastInsertedId() : int {
         return $this->pdo->lastInsertId();
     }
+
+    public function countSelect() : int {
+        return $this->stmt->fetchcolumn();
+    }
     
 }
 

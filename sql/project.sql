@@ -16,6 +16,7 @@ create table Users (
 create table Meetups (
 	id INT AUTO_INCREMENT PRIMARY KEY,	
 	title VARCHAR(250),
+	image VARCHAR(250),
 	category VARCHAR(250),
 	province VARCHAR(250),		
 	city VARCHAR(250),
@@ -44,8 +45,8 @@ create table meetup_users (
 -- 			values ('1',"leoguotengxu@gmail.com",'1234567','Leo','male');
 
 
-insert into Meetups (title,category,province,city,address,mTime,mDay,userId) 
-			values ('leomeet',"hiking",'BC','Burnaby','5452 clinton st','11:30:45','2022-7-10',1);
+-- insert into Meetups (title,category,province,city,address,mTime,mDay,userId) 
+-- 			values ('leomeet',"hiking",'BC','Burnaby','5452 clinton st','11:30:45','2022-7-10',1);
 
 -- insert into Meetup_users (meetupId,userId) values (1,1);
 

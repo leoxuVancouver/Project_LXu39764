@@ -14,6 +14,7 @@ require_once('inc/Utility/FileUtility.class.php');
 require_once('inc/Utility/MeetupDao.class.php');
 require_once('inc/Utility/MeetupUserDao.class.php');
 require_once('inc/Utility/JoinStatus.class.php');
+require_once('inc/Utility/AttendeeCount.class.php');
 
 //Start the session
 session_start();
@@ -40,6 +41,7 @@ if(empty($_POST)){
         }
         $meetupUsers=MeetupUserDao::getMeetupUsers();
         JoinStatus::check($meetups,$meetupUsers);
+        AttendeeCount::count($meetups,$meetupUsers);
 //
         
         //
@@ -58,7 +60,7 @@ if(empty($_POST)){
         MeetupUserDAO::initialize("Meetup_users");
         $meetupUsers=MeetupUserDao::getMeetupUsers();
         JoinStatus::check($meetups,$meetupUsers);
-        
+        AttendeeCount::count($meetups,$meetupUsers);
         //
         Page::showHeader();
         Page::showMeetupList($meetups);

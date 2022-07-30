@@ -95,6 +95,9 @@ class Validate {
                 break;
             }
          }
+         if(FileUtility::uploadImage()){
+            self::$valid_status[]=FileUtility::uploadImage();
+         };
         Page::$notifications=self::$valid_status;
         if(empty(self::$valid_status))
             return true;

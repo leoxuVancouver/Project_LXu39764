@@ -35,6 +35,7 @@ if(empty($_POST)){
         exit;
     }
 }else{   
+    if(Validate::validateMeetupForm()){
     MeetupDAO::initialize("Meetup");
     //title,province,city,address,mTime,mDay,userId
     $nm=new Meetup();
@@ -48,6 +49,11 @@ if(empty($_POST)){
     $nm->setmDay($_POST['mDay']);
     $nm->setuserId($_SESSION['userId']);
     //
+    
+    $imageUrl=IMAGEREPOSITORY.$_FILES['imagefile']['name'];
+    
+    $nm->setImage($imageUrl);
+    //
     $meetupId=MeetupDAO::createMeetup($nm);
    //
    $nmu=new Meetup_users();
@@ -57,4 +63,13 @@ if(empty($_POST)){
             MeetupUserDAO::createMeetupUsers($nmu); 
     header("Location: Project_meetup_LXu39674.php");
     exit;  
+    }else{
+        MeetupDAO::initialize("Meetup");
+        $content=FileUtility::read();
+        $categories=DataParse::strToArray($content);
+        Page::showHeader();
+        Page::createMeetup($categories);
+        Page::showFooterLogin();
+
+    }
 }

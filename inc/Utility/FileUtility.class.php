@@ -2,7 +2,7 @@
 
 class FileUtility {
 
-    static $notifications = array();
+    static $error ='';
     
 
     static function read()    {
@@ -49,10 +49,7 @@ class FileUtility {
         
     }
 
-    static function upload(){
-        
-       
-
+    static function uploadCatData(){
         //A simple check if a file was uploaded
         
         if (empty($_FILES['cateData']['name'])) {
@@ -61,9 +58,7 @@ class FileUtility {
         else{
             
             if (is_uploaded_file($_FILES['cateData']['tmp_name'])) {
-                // We skip the file format checking
-                
-                // Move uploaded file to final destination.                
+                // We skip the file format checking              
                 
                 $result = move_uploaded_file($_FILES['cateData']['tmp_name'],FILENAME);
                 if ($result == 1){ 
@@ -73,10 +68,25 @@ class FileUtility {
                     Page::$notifications[] = "Error: There was a problem uploading the file.";
             }
         }
+    }
 
+    static function uploadImage(){
+        //A simple check if a file was uploaded
         
-       
-    
+        if (empty($_FILES['imagefile']['name'])) {
+            self::$error = "Error: Please select a image to upload.";       
+        }
+        else{
+            
+            if (is_uploaded_file($_FILES['imagefile']['tmp_name'])) {
+                // We skip the file format checking              
+                $imageUrl=IMAGEREPOSITORY.$_FILES['imagefile']['name'];
+                $result = move_uploaded_file($_FILES['imagefile']['tmp_name'],$imageUrl);
+                if ($result != 1)
+                     self::$error = "Error: There was a problem uploading the file.";
+            }
+        }
+        return self::$error;
     }
 
     

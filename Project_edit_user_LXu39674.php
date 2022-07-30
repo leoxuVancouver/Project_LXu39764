@@ -25,8 +25,9 @@ if(empty($_POST)){
         // get the user detail
         UserDAO::initialize("User");
         $user = UserDAO::getUser($_SESSION['loggedin']);
+        $disabled="disabled";
         Page::showHeader();
-        Page::showUser($user);
+        Page::showUser($user, $disabled);
         Page::showFooterLogin();
     
     }else{
@@ -34,6 +35,16 @@ if(empty($_POST)){
         exit;
     }
 }else{
+    if(isset($_POST['edit'])&&$_POST['edit']){
+        UserDAO::initialize("User");
+        $user = UserDAO::getUser($_SESSION['loggedin']);
+        $disabled="";
+        Page::showHeader();
+        Page::showUser($user, $disabled);
+        Page::showFooterLogin();
+
+    }else{
+   
     if(Validate::validateEditUserForm()){
         UserDAO::initialize("User");
         //title,province,city,address,mTime,mDay,userId
@@ -46,15 +57,19 @@ if(empty($_POST)){
         $nu->setPhone($_POST['phone']);
         $nu->setGender($_POST['gender']);
         UserDAO::updateUser($nu);
-        header("Location: Project_meetup_LXu39674.php");
-        exit;  
-    }else{
+        Page::$notifications[]="user information updated";
+        
+       
+    }
         UserDAO::initialize("User");
         $user = UserDAO::getUser($_SESSION['loggedin']);
-        Page::showHeader();
-        Page::showUser($user);
+        $disabled="disabled";
+        Page::showHeader(); 
+        Page::showUser($user,$disabled);
         Page::showFooterLogin(); 
-    }
+    
+         
+}
     
 }
 

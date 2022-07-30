@@ -5,8 +5,10 @@ define("IMAGES",'./images/');
 
 //
  define("REPOSITORY",'./data/');
+ define("IMAGEREPOSITORY",'./images/');
  define("FILEDATA",'categories.txt');
  define("FILENAME",REPOSITORY.FILEDATA);
+ define("PROVINCE",['AB','BC','MB','NB','NL','NT','NS','NU','ON','PE','QC','SK','YT']);
 
 
 // Set all the database things! double check with the PDOWrapper class and your database 
