@@ -6,4 +6,16 @@
             "email": "leoguotengxu@gmail.com"
         }
     ],
-    "require": {"php": ">=7.1.0"}
+    "require": { # 需要安装的扩展
+        "php": ">=7.1.0",
+        "qcloud/cos-sdk-v5": ">=2.0",
+        "aliyuncs/oss-sdk-php": "^2.4.0",
+        "phpunit/phpunit": "^5.0|^6.0",
+        "qiniu/php-sdk": "^7.3"
+    },
+    "autoload": { # 自动加载: 注意了, 这里有 psr-4, psr-2 多种规范, 并且,注意目录和命名空间
+        "psr-4": {
+            "meetup\": "src"
+        }
+    }
+}
