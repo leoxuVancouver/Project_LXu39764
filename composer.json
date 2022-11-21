@@ -1,0 +1,9 @@
+{
+    "name": "leoxuvancouver/project_lxu39764",
+    "authors": [
+        {
+            "name": "leoxuVancouver",
+            "email": "leoguotengxu@gmail.com"
+        }
+    ],
+    "require": {"php": ">=7.1.0"}
